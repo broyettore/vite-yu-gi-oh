@@ -1,16 +1,22 @@
 <script>
+import { store } from '../store';
 export default {
-    name: "selectComponent"
+    data() {
+        return {
+            searckKey: "",
+            store
+        }
+    },
 }
 </script>
 
 <template>
     <div class="container mb-3">
-        <select class="form-select ms-select" aria-label="Default select example">
-            <option selected>---</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <select class="form-select ms-select" aria-label="Default select example" v-model="searckKey">
+            <option value="alien">Alien</option>
+            <option value="melodius">Melodius</option>
+            <option value="elemental">Elemental</option>
+            <option value="noble-knight">Noble Knight</option>
     </select>
     </div>
 </template>

@@ -1,10 +1,16 @@
 <script>
+import { store } from '../store';
 import cardComp from './cardComp.vue';
 
 export default {
+    data() {
+        return {
+            store,
+        }
+    },
     components: {
         cardComp
-    }
+    },
 }
 </script>
 
@@ -12,10 +18,15 @@ export default {
     <div class="container d-flex justify-content-center align-items-center p-5">
         <div class="card-ctn">
             <div class="card-filter p-3">
-                <span>Found</span>
+                <span>Found {{ store.limitedCards }} cards</span>
             </div>
-            <div class="card-list">
-                <cardComp></cardComp>
+            <div class="row gy-2">
+                <div class="card-list col-12 col-md-4 col-lg-3 d-flex align-items-stretch"  v-for="(card, index) in store.cards.slice(0, 50)">
+                    <cardComp :img="card.card_images[0].image_url"  :name="card.name.toUpperCase()" :species="card.archetype"/>
+                </div>
+            </div>
+            <div class="loader-ctn d-flex justify-content-center p-3">
+                <div class="loader"></div>
             </div>
         </div>
     </div>
@@ -26,12 +37,33 @@ export default {
 .container {
     background-color: $primary-color;
     color: $primary-color;
-    height: 90%;
 
-    .card-ctn {
+    .card-ctn,
+    .loader-ctn {
         width: 100%;
-        height: 100%;
-        background-color: #212529;
-    }
+
+        .card-filter {
+            background-color: #212529;
+        }
+
+        .loader {
+                display: block;
+                width: 64px;
+                height: 64px;
+                margin: 8px;
+                border-radius: 50%;
+                border: 6px solid #000;
+                border-color: #000 transparent #000 transparent;
+                animation: loader 1.2s linear infinite;
+        }
+                @keyframes loader {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+                }
+    }  
 }
 </style>

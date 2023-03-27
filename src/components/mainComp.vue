@@ -23,7 +23,6 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/_partials/variables.scss' as *;
 main {
-    height: calc(100vh - 96px);
     background-color: $bg-color;
     color: $primary-color;
 }
