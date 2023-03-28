@@ -5,4 +5,5 @@ export const store = reactive({
     cardsFound: 0,
     searchSelect: "",
     archetypes: [],
+    loading: true,
 })

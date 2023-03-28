@@ -25,6 +25,7 @@ export default {
     .then((response) => {
       this.store.cards = response.data.data;
       this.store.limitedCards = this.store.cards.slice(0, 1000).length;
+      this.store.loading = false;
     })
     .catch((error) => {
         console.log(error);
