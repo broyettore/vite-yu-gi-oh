@@ -3,18 +3,22 @@ import searchComp from './searchComp.vue';
 import cardContainer from './cardContainer.vue';
 
 export default {
-    name: "mainComponent",
-
     components: {
         searchComp,
         cardContainer
+    },
+    methods: {
+
+        filterCard() {
+            this.$emit("filterType")
+        }
     }
 }
 </script>
 
 <template>
     <main class="d-flex flex-column align-items-center justify-content-center py-5">
-        <searchComp></searchComp>
+        <searchComp @filter="filterCard"></searchComp>
         <cardContainer></cardContainer>
     </main>
 

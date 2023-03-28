@@ -20,13 +20,13 @@ export default {
             <div class="card-filter p-3">
                 <span>Found {{ store.limitedCards }} cards</span>
             </div>
-            <div class="row gy-2">
-                <div class="card-list col-12 col-md-4 col-lg-3 d-flex align-items-stretch"  v-for="(card, index) in store.cards.slice(0, 50)">
+            <div class="loader-ctn d-flex justify-content-center p-3" v-show="store.limitedCards === 0">
+                <div class="loader"></div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 gy-2">
+                <div class="col d-flex align-items-stretch"  v-for="(card, index) in store.cards.slice(0, 1000)">
                     <cardComp :img="card.card_images[0].image_url"  :name="card.name.toUpperCase()" :species="card.archetype"/>
                 </div>
-            </div>
-            <div class="loader-ctn d-flex justify-content-center p-3">
-                <div class="loader"></div>
             </div>
         </div>
     </div>

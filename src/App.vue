@@ -14,19 +14,35 @@ export default {
     headerComp,
     mainComp
   },
-  created() {
-    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php') 
+  methods: {
+
+    search() {
+    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php', {
+        params: {
+          archetype: store.searchSelect,
+        }
+      }) 
     .then((response) => {
       this.store.cards = response.data.data;
-      this.store.limitedCards = this.store.cards.slice(0, 50).length;
+      this.store.limitedCards = this.store.cards.slice(0, 1000).length;
     })
+    .catch((error) => {
+        console.log(error);
+        this.store.cards = [];
+        this.store.limitedCards = 0;
+      })
+  },
+  created() {
+    this.search();
+  }
+
   }
 }
 </script>
 
 <template>
   <headerComp></headerComp>
-  <mainComp></mainComp>
+  <mainComp @filterType="search"></mainComp>
 </template>
 
 <style lang="scss" scoped>
